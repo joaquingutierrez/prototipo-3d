@@ -1,0 +1,18 @@
+.logo {
+    height: 70px;
+    margin: auto 1%;
+} 
+
+.bg-color {
+    background: rgb(41,129,13);
+    background: linear-gradient(0deg, rgba(41,129,13,1) 55%, rgba(28,6,94,1) 100%);
+}
+
+.nav-item {
+    margin: auto 7%;
+    transition: 0.5s;
+}
+.nav-item:hover {
+    box-shadow: 2px 2px 5px #999;
+    transform: scale(1.1,1.1);
+}
