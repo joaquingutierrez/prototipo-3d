@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap'
 import logo from '../assets/logo.png'
 import './NavBar.css'
+import CartWidget from './CartWidget'
 
 
 const NavBar = () => {
@@ -29,6 +30,7 @@ const NavBar = () => {
                                 <a className="nav-link" href="#">Juguetes</a>
                             </li>
                         </ul>
+                        <CartWidget />
                         <form className="d-flex" role="search">
                             <input className="form-control me-2" type="search" placeholder="Buscar..." aria-label="Search" />
                             <button className="btn btn-success" type="submit">Buscar</button>
