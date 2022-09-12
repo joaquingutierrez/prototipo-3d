@@ -1,43 +1,47 @@
 import React from "react";
 import 'bootstrap/dist/css/bootstrap.min.css'
-import 'bootstrap'
 import logo from '../assets/logo.png'
 import './NavBar.css'
 import CartWidget from './CartWidget'
+import Container from 'react-bootstrap/Container';
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 
 const NavBar = () => {
     return (
         <>
-            <nav className="navbar navbar-expand-lg bg-color">
-                <div className="container-fluid">
-                    <a className="navbar-brand" href="#">
-                        <img src={logo} alt="Logo de Prototipo 3D" className="logo d-inline-block" />
-                            Prototipo 3D
-                    </a>
-                    <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                        <span className="navbar-toggler-icon"></span>
-                    </button>
-                    <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul className="navbar-nav me-auto mb-2 mb-lg-0 text-center mx-auto">
-                            <li className="nav-item">
-                                <a className="nav-link" href="#">Accesorios</a>
-                            </li>
-                            <li className="nav-item">
-                                <a className="nav-link" href="#">Veladores</a>
-                            </li>
-                            <li className="nav-item">
-                                <a className="nav-link" href="#">Juguetes</a>
-                            </li>
-                        </ul>
-                        <CartWidget />
-                        <form className="d-flex" role="search">
-                            <input className="form-control me-2" type="search" placeholder="Buscar..." aria-label="Search" />
-                            <button className="btn btn-success" type="submit">Buscar</button>
-                        </form>
-                    </div>
-                </div>
-            </nav>
+            <Row>
+                <Navbar className="bg-color" expand="lg">
+                    <Container fluid>
+                        <Col className="titulo-nav">
+                            <Navbar.Brand href="#home">
+                                <img className="logo" src={logo} alt="Logo de Prototipo 3D" />
+                                Prototipo 3D
+                            </Navbar.Brand>
+                        </Col>
+                        <Col xs={6}>
+                            <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                                <Navbar.Collapse id="basic-navbar-nav">
+                                    <Nav className="mx-auto">
+                                        <Nav.Link href="#Accesorios" className="nav-item">Accesorios</Nav.Link>
+                                        <Nav.Link href="#Veladores" className="nav-item">Veladores</Nav.Link>
+                                        <Nav.Link href="#Juguetes" className="nav-item">Juguetes</Nav.Link>
+                                    </Nav>
+                                </Navbar.Collapse>
+                        </Col>
+                        <Col className="cart-search-nav">
+                            <CartWidget />
+                            <form className="d-flex" role="search">
+                                <input className="form-control me-2" type="search" placeholder="Buscar..." aria-label="Search" />
+                                <button className="btn btn-success" type="submit">Buscar</button>
+                            </form>
+                        </Col>
+                    </Container>
+                </Navbar>
+            </Row>
         </>
     )
 }
