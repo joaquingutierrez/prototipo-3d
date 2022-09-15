@@ -1,0 +1,10 @@
+.contenedorItems {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 50px;
+    row-gap: 50px;
+    width: 75%;
+    margin-left: auto;
+    margin-right: auto;
+}
