@@ -1,0 +1,23 @@
+.containerItemDetail {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-template-areas: 
+        'images buy'
+        'description none'
+    ;
+}
+.image {
+    grid-area: images;
+    width: 100%;
+}
+.description {
+    grid-area: description;
+}
+.buy {
+    grid-area: buy;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
