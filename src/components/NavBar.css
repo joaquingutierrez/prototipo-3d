@@ -8,24 +8,30 @@
     background: linear-gradient(0deg, rgba(41, 129, 13, 1) 55%, rgba(28, 6, 94, 1) 100%);
 }
 
-.titulo-nav {
+.navBar {
     display: flex;
-    justify-content: start;
-    margin-left: 1%;
+    justify-content: space-between;
+    align-items: center;
+    list-style: none;
+    color: black;
 }
 
-.nav-item {
-    transition: 0.5s;
-    margin: auto 7%;
+.titleLogo {
+    display:flex;
+    align-items: center;
 }
 
-.nav-item:hover {
-    box-shadow: 2px 2px 5px #999;
-    transform: scale(1.1, 1.1);
+.cartSearch {
+    display:flex;
+    align-items: center;
 }
 
-.cart-search-nav {
-    display: flex;
-    justify-content: end;
-    margin-right: 1%;
+.styleNone {
+    text-decoration: none;
+    color: black;
+}
+
+.styleNone:hover {
+    text-decoration: none;
+    color: black;
 }

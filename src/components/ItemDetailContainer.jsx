@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import {productsList} from '../assets/productsList'
 import Spinner from 'react-bootstrap/Spinner'
 import './ItemDetailContainer.css'
+import { useParams } from "react-router-dom";
 
 const onAdd= () => {
     console.log("Agregado al carrito");
@@ -11,6 +12,8 @@ const onAdd= () => {
 
 
 const ItemDetailContainer = () => {
+
+    const { id } = useParams()
     
     const [product, setProduct] = useState({})
     const [loading, setLoading] = useState([true])
@@ -19,14 +22,14 @@ const ItemDetailContainer = () => {
         setLoading(true)
         new Promise((resolve) => {
             setTimeout(() => {
-                resolve(productsList[6])
+                resolve(productsList[id - 1])
             },2000)
         })
         .then(res => {
             setProduct(res)
             setLoading(false)
         })
-    },[])
+    },[id])
     
     
     return (

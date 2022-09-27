@@ -1,0 +1,19 @@
+.card {
+    width: 300px;
+}
+
+.imageProduct {
+    max-height: 100%;
+    max-width: 100%;
+    display: flex;
+    margin: auto;
+}
+.imageProductContainer {
+    height: 350px;
+    display: flex;
+    margin: auto;
+}
+
+.card-body {
+    border-top: 1px solid rgba(0, 0, 0, 0.175);
+}

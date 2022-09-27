@@ -1,23 +1,33 @@
 .containerItemDetail {
     display: grid;
     grid-template-columns: 3fr 1fr;
-    grid-template-rows: 1fr 1fr;
+    grid-template-rows: 600px 1fr;
     grid-template-areas: 
         'images buy'
         'description none'
     ;
+    gap: 2%
 }
+
 .image {
     grid-area: images;
-    width: 100%;
+    margin: auto;
+    height: 95%;
 }
 .description {
     grid-area: description;
+    border-top: 1px solid gray;
+    padding-top: 2%;
 }
 .buy {
     grid-area: buy;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    text-align: center;
     align-items: center;
+    border: 2px solid gray;
+    width: 75%;
+    height: 60%;
+    margin: auto;
 }

@@ -1,0 +1,25 @@
+.styleNone {
+    text-decoration: none;
+    color: black;
+}
+
+.styleNone:hover {
+    text-decoration: none;
+    color: black;
+}
+
+.navLinks {
+    width: 100%;
+    margin: auto 20%;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.nav-item {
+    transition: 0.5s;
+}
+
+.nav-item:hover {
+    box-shadow: 2px 2px 5px #999;
+    transform: scale(1.1, 1.1);
+}

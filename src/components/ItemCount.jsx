@@ -17,9 +17,9 @@ const ItemCount = ({ stock, initial, onAdd }) => {
     return (
         <>
             <div className="d-flex justify-content-center mb-2">
-                <Button variant="dark" disabled={contador === initial} onClick={substract} className="">-</Button>
+                <Button variant="dark" disabled={contador === initial} onClick={substract}>-</Button>
                 <h3 className="width-numer text-center">{contador}</h3>
-                <Button variant="dark" disabled={contador === stock} onClick={add} className="">+</Button>
+                <Button variant="dark" disabled={contador === stock} onClick={add}>+</Button>
             </div>
             <div className="text-center mb-2">
                 <Button variant="success" onClick={onAdd}>Agregar al Carrito</Button>
