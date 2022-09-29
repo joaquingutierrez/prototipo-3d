@@ -1,6 +1,6 @@
 import React from "react";
 import logo from '../assets/logo.png'
-import './NavBar.css'
+import './styles/NavBar.css'
 import CartWidget from './CartWidget'
 import Search from './Search'
 import { Link } from "react-router-dom";

@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css'
 import Button from 'react-bootstrap/Button';
-import './ItemCount.css'
+import './styles/ItemCount.css'
 
 const ItemCount = ({ stock, initial, onAdd }) => {
 
@@ -10,9 +10,8 @@ const ItemCount = ({ stock, initial, onAdd }) => {
 
     const add = () => contador < stock && setContador(contador + 1)
 
-
-
     const substract = () => (contador > initial) && setContador(contador - 1)
+
 
     return (
         <>
@@ -22,7 +21,7 @@ const ItemCount = ({ stock, initial, onAdd }) => {
                 <Button variant="dark" disabled={contador === stock} onClick={add}>+</Button>
             </div>
             <div className="text-center mb-2">
-                <Button variant="success" onClick={onAdd}>Agregar al Carrito</Button>
+                <Button variant="success" onClick={() => onAdd(contador)}>Agregar al Carrito</Button>
             </div>
         </>
     )

@@ -3,7 +3,7 @@ import ItemList from "./ItemList";
 import {productsList} from '../assets/productsList'
 import Spinner from 'react-bootstrap/Spinner'
 import { useState, useEffect } from "react";
-import './ItemListContainer.css'
+import './styles/ItemListContainer.css'
 import { useParams } from "react-router-dom";
 
 
