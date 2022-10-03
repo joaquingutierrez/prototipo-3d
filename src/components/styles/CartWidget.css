@@ -1,3 +1,17 @@
 .shoppingCart {
     margin: auto 2%;
+    position: relative;
+}
+
+.numerItemsContainer {
+    position: absolute;
+    background-color: red;
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    top: -5px;
+    right: 5px;
+}
+.numerItems {
+    text-align: center;
 }

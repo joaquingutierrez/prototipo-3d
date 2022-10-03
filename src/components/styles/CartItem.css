@@ -1,0 +1,30 @@
+.cartItem {
+    display: grid;
+    background-color: white;
+    grid-template-columns: 1fr 3fr 1fr 1fr;
+    grid-template-rows: 1fr;
+    grid-template-areas: 
+        "delete name price total"
+    ;
+}
+
+.name {
+    grid-area: name;
+}
+.price {
+    grid-area: price;
+    text-align: end;
+}
+.total {
+    grid-area: total;
+    text-align: end;
+}
+.delete {
+    grid-area: delete;
+    cursor: pointer;
+    text-align: center;
+}
+
+.background-gray {
+    background-color: gray;
+}

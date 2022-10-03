@@ -1,11 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
 import ShoppingCartRoundedIcon from '@mui/icons-material/ShoppingCartRounded';
 import './styles/CartWidget.css'
+import { CartContext } from "../context/CartContext";
 
 const CartWidget = () => {
+
+    const {cart} = useContext(CartContext)
+    const cartLength = cart.length
     return (
         <div className="shoppingCart">
             <ShoppingCartRoundedIcon fontSize="large"/>
+            {(cartLength>0) && (<div className="numerItemsContainer"><p className="numerItems">{cartLength}</p></div>)}
         </div>
     )
 }

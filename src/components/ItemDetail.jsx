@@ -1,20 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import ItemCount from './ItemCount'
 import './styles/ItemDetail.css'
 import { Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
+import { CartContext } from "../context/CartContext";
 
 
 const ItemDetail = ({ product }) => {
-
     
     const { name, image, description, stock, price } = product
     const [checkout, setCheckout] = useState(false)
+    const {addItem, addDuplicateItem, isInCart} = useContext(CartContext)
     
     const onAdd= (contador) => {
-        console.log("Agregado al carrito: ", contador, 'items');
+        (isInCart(product.id) + 1) ? addDuplicateItem(isInCart(product.id), contador) : addItem(product, contador)
         setCheckout(true)
     }
+
 
     return (
         <div className="containerItemDetail">
