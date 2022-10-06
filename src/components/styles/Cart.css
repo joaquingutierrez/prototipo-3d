@@ -51,3 +51,15 @@
     grid-area: button;
     margin: 6px;
 }
+
+.noProductsTitle {
+    text-align: center;
+    margin-top: 20%;
+}
+.noProductsTitleLink {
+    color: green;
+    text-decoration: none;
+}
+.noProductsTitleLink:hover {
+    color: rgb(1, 80, 1);
+}

@@ -3,6 +3,7 @@ import { Button } from "react-bootstrap";
 import { CartContext } from "../context/CartContext";
 import CartItem from "./CartItem"
 import './styles/Cart.css'
+import { Link } from "react-router-dom";
 
 const totalItem = (product) => {
     return product.quantity * product.price
@@ -27,12 +28,12 @@ const Cart = () => {
         <>
             {(cart.length) ? (
                 <>
-                <div className="titles">
+                    <div className="titles">
                         <h3 className="deleteTitle">Eliminar</h3>
                         <h3 className="nameTitle">Cantidad x Producto</h3>
                         <h3 className="priceTitle">Precio por unidad</h3>
                         <h3 className="total-priceTitle">Precio total</h3>
-                </div>
+                    </div>
                     <div className="cartContainer">
                         {cart.map((product, index) => <CartItem key={product.id} totalItem={totalItem} product={product} index={index} removeItem={removeItem} />)}
                     </div>
@@ -43,7 +44,7 @@ const Cart = () => {
                 </>
             )
                 : (
-                    <h1>No hay productos agregados</h1>
+                    <h2 className="noProductsTitle">No hay productos agregados click <Link to="/" className="noProductsTitleLink">aquí</Link> para volver al inico</h2>
                 )}
         </>
     )

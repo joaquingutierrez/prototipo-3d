@@ -3,10 +3,20 @@ import ShoppingCartRoundedIcon from '@mui/icons-material/ShoppingCartRounded';
 import './styles/CartWidget.css'
 import { CartContext } from "../context/CartContext";
 
+
+const quantityProducts = (array) => {
+    let quantityProducts = 0;
+    array.map((product)=> 
+        quantityProducts += product.quantity
+    )
+    return quantityProducts
+}
+
 const CartWidget = () => {
 
+
     const {cart} = useContext(CartContext)
-    const cartLength = cart.length
+    const cartLength = quantityProducts(cart)
     return (
         <div className="shoppingCart">
             <ShoppingCartRoundedIcon fontSize="large"/>
