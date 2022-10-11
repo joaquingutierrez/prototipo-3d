@@ -5,7 +5,8 @@ import Spinner from 'react-bootstrap/Spinner'
 import { useState, useEffect } from "react";
 import './styles/ItemListContainer.css'
 import { useParams } from "react-router-dom";
-
+import { db } from '../firebase/firebase'
+import { collection, getDocs, query, where } from "firebase/firestore"
 
 const ItemListContainer = ({greeting}) => {
     
@@ -15,14 +16,22 @@ const ItemListContainer = ({greeting}) => {
     const [loading, setLoading] = useState([true])
 
     useEffect(() => {
+
+        const q = id ? query(collection(db, "products"), where("category", "==", id.charAt(0).toUpperCase() + id.slice(1))) : collection(db, 'products')
+
         setLoading(true)
-        new Promise((resolve) => {
-            setTimeout(() => {
-                resolve(id ? productsList.filter((item) => item.category.toUpperCase() === id.toUpperCase()) : productsList)
-            },2000)
+
+        getDocs(q)
+        .then((data)=>{
+            const lista = data.docs.map((doc)=>{
+                return {
+                    ...doc.data(), 
+                    id: doc.id
+                }
+            })
+            setProducts(lista)
         })
-        .then(res => {
-            setProducts(res)
+        .finally(()=>{
             setLoading(false)
         })
     },[id])
