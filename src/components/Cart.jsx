@@ -1,9 +1,13 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Button } from "react-bootstrap";
 import { CartContext } from "../context/CartContext";
 import CartItem from "./CartItem"
 import './styles/Cart.css'
 import { Link } from "react-router-dom";
+import { collection, addDoc, serverTimestamp, doc, updateDoc, getDoc } from "firebase/firestore";
+import BuyerForm from "./BuyerForm";
+import { db } from "../firebase/firebase";
+import swal from "sweetalert";
 
 const totalItem = (product) => {
     return product.quantity * product.price
@@ -19,10 +23,59 @@ const totalPrice = (cart) => {
 }
 
 
+
 const Cart = () => {
+
+    const [show, setShow] = useState(false);
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+
+
+    const [finish, setFinish] = useState(false)
+    const [saleID, setSaleID] = useState('')
 
     const { cart, removeItem, clear } = useContext(CartContext)
 
+    const stockUpdate = (cart, user) => {
+        handleClose()
+        //list es un array para mostrar los productos que no se encuentran en stock
+        let list = []
+        cart.map((product) => {
+            //Traigo la cantidad de stock disponible en el momento de la compra
+            getDoc(doc(db, 'products', product.id))
+                .then((data) => {
+                    if (data.data().stock - product.quantity >= 0) {
+                        updateDoc(doc(db, 'products', product.id), {
+                            stock: data.data().stock - product.quantity
+                        })
+                        buy(cart, user)
+                    } else {
+                        list = [...list, '\n' + product.name ]
+                        swal('No hay stock suficiente de: ' + list)
+                    }
+                })
+        })
+    }
+
+
+    const buy = (cart, user) => {
+        if ((user.name) && (user.phone) && (user.email)) {
+            addDoc(collection(db, 'sales'), {
+                user: user,
+                items: cart,
+                date: serverTimestamp(),
+                total: totalPrice(cart)
+            })
+                .then((data) => {
+                    setFinish(true)
+                    setSaleID(data.id)
+                    clear()
+                })
+        } else {
+            swal('Error', 'Por favor complete todos los campos', 'warning')
+        }
+    }
 
     return (
         <>
@@ -41,9 +94,11 @@ const Cart = () => {
                         <Button className="button-clear" variant="success" onClick={clear}>Eliminar todo</Button>
                         <h4 className="total">Total: ${totalPrice(cart)}</h4>
                     </div>
+                    <Button className="button-finish" variant="success" onClick={handleShow}>Comprar</Button>
+                    <BuyerForm show={show} handleClose={handleClose} buy={stockUpdate} cart={cart} />
                 </>
             )
-                : (
+                : (finish ? <h2>Gracias por su compra, el ID es {saleID}</h2> :
                     <h2 className="noProductsTitle">No hay productos agregados click <Link to="/" className="noProductsTitleLink">aquí</Link> para volver al inico</h2>
                 )}
         </>

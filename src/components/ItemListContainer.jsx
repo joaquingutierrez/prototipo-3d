@@ -1,6 +1,5 @@
 import React from "react";
 import ItemList from "./ItemList";
-import {productsList} from '../assets/productsList'
 import Spinner from 'react-bootstrap/Spinner'
 import { useState, useEffect } from "react";
 import './styles/ItemListContainer.css'
