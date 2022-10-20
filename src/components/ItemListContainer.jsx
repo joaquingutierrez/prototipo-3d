@@ -10,17 +10,20 @@ import { collection, getDocs, query, where } from "firebase/firestore"
 const ItemListContainer = ({greeting}) => {
     
     const {id} = useParams()
+    const {tag} = useParams()
 
     const [products, setProducts] = useState([])
     const [loading, setLoading] = useState([true])
 
     useEffect(() => {
 
-        const q = id ? query(collection(db, "products"), where("category", "==", id.charAt(0).toUpperCase() + id.slice(1))) : collection(db, 'products')
+        const q = id && query(collection(db, "products"), where("category", "==", id.charAt(0).toUpperCase() + id.slice(1)))
+
+        const searchQ = tag ? query(collection(db, "products"), where("tags", "array-contains", tag)) : collection(db, 'products')
 
         setLoading(true)
 
-        getDocs(q)
+        getDocs(q || searchQ)
         .then((data)=>{
             const lista = data.docs.map((doc)=>{
                 return {
@@ -33,7 +36,9 @@ const ItemListContainer = ({greeting}) => {
         .finally(()=>{
             setLoading(false)
         })
-    },[id])
+    },[id, tag])
+
+
     
     return (
         <>

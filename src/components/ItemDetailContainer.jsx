@@ -36,7 +36,6 @@ const ItemDetailContainer = () => {
                 })
                 .finally(()=>{
                     setLoading(false)
-                    console.log(product);
             })
     }, [id, cart, product, stockLocalControl])
 

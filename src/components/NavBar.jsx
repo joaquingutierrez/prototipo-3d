@@ -21,7 +21,7 @@ const NavBar = () => {
 
     return (
         <>
-            <Row className='w-100'>
+            <Row className='w-100 gx-0'>
                 <Navbar className="bg-color" expand="lg">
                     <Container fluid>
                         <Col className="titulo-nav">

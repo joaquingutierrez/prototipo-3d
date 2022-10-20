@@ -6,7 +6,7 @@ const ItemList = ({productsList}) => {
 
     return (
         <div className="contenedorItems">
-            {productsList.map((prod) => <Item key={prod.id} product={prod}/>)}
+            {productsList.length > 0 ? productsList.map((prod) => <Item key={prod.id} product={prod}/>) : <h1>No se encontraron productos</h1>}
         </div>
     )
 }
