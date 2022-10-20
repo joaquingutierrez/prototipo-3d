@@ -23,3 +23,9 @@
     box-shadow: 2px 2px 5px #999;
     transform: scale(1.1, 1.1);
 }
+
+.active {
+    border-bottom: 1px solid black;
+    pointer-events: none;
+    transform: scale(1.1, 1.1);
+}

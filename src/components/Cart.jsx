@@ -43,7 +43,7 @@ const Cart = () => {
         let list = []
         cart.map((product) => {
             //Traigo la cantidad de stock disponible en el momento de la compra
-            getDoc(doc(db, 'products', product.id))
+            return getDoc(doc(db, 'products', product.id))
                 .then((data) => {
                     if (data.data().stock - product.quantity >= 0) {
                         updateDoc(doc(db, 'products', product.id), {

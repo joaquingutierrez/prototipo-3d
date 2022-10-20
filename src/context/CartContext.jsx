@@ -34,9 +34,22 @@ const CartProvider = ( {children} ) => {
         
     }
 
+    const quantityProducts = (array) => {
+        let quantityProducts = 0;
+        array.map((product)=> 
+            quantityProducts += product.quantity
+        )
+        return quantityProducts
+    }
+
+    const stockLocalControl = (cart, product, id) => {
+        if (isInCart(id) + 1)  {
+            return (product.stock - cart[isInCart(id)].quantity)
+        }
+    }
 
     return (
-        <CartContext.Provider value={ {cart, addItem, addDuplicateItem, removeItem, clear, isInCart} }>
+        <CartContext.Provider value={ {cart, addItem, addDuplicateItem, removeItem, clear, isInCart, quantityProducts, stockLocalControl} }>
             {children}
         </CartContext.Provider>
     )

@@ -4,18 +4,9 @@ import './styles/CartWidget.css'
 import { CartContext } from "../context/CartContext";
 
 
-const quantityProducts = (array) => {
-    let quantityProducts = 0;
-    array.map((product)=> 
-        quantityProducts += product.quantity
-    )
-    return quantityProducts
-}
-
 const CartWidget = () => {
 
-
-    const {cart} = useContext(CartContext)
+    const {cart, quantityProducts} = useContext(CartContext)
     const cartLength = quantityProducts(cart)
     return (
         <div className="shoppingCart">

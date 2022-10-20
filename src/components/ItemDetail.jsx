@@ -6,12 +6,13 @@ import { Button } from "react-bootstrap";
 import { CartContext } from "../context/CartContext";
 
 
-const ItemDetail = ({ product }) => {
+const ItemDetail = ({ product, id }) => {
     
     const { name, image, description, stock, price } = product
     const [checkout, setCheckout] = useState(false)
-    const {addItem, addDuplicateItem, isInCart} = useContext(CartContext)
+    const { addItem, addDuplicateItem, isInCart } = useContext(CartContext)
     
+
     const onAdd= (contador) => {
         (isInCart(product.id) + 1) ? addDuplicateItem(isInCart(product.id), contador) : addItem(product, contador)
         setCheckout(true)
@@ -25,7 +26,7 @@ const ItemDetail = ({ product }) => {
             <div className="buy">
                 <h2>{name}</h2>
                 <h4>${price}</h4>
-                {checkout ? <Button variant="success"><Link to="/cart" className="style-link">Finalizar compra</Link></Button> : <ItemCount stock={stock} initial={1} onAdd={onAdd} />}
+                {checkout ? <Button variant="success"><Link to="/cart" className="style-link">Finalizar compra</Link></Button> : (<ItemCount stock={stock} initial={1} onAdd={onAdd} />)}
             </div>
         </div>
     )
