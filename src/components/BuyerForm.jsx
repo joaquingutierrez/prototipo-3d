@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button, Modal } from "react-bootstrap";
 import './styles/BuyerForm.css'
 
@@ -10,6 +10,18 @@ const BuyerForm = ({ show, handleClose, buy, cart }) => {
             phone: document.getElementById('tel').value,
             email: document.getElementById('email').value
         })
+    }
+
+
+    const [emailConfirmation, setEmailConfirmation] = useState(false)
+
+    const handleChangeEmail = () => {
+        const email = document.getElementById('email').value
+        const email2 = document.getElementById('email2').value
+        if (email2 === email) {
+            return setEmailConfirmation(true)
+        }
+        return setEmailConfirmation(false)
     }
 
     return (
@@ -34,6 +46,10 @@ const BuyerForm = ({ show, handleClose, buy, cart }) => {
                             Email:
                         </label>
                         <input type="email" id="email" />
+                        <label>
+                            Confimación del Email:
+                        </label>
+                        <input autoComplete="off" onChange={handleChangeEmail} className={emailConfirmation ? '' : 'wrong'} type="email" id="email2" />
                     </form>
 
                 </Modal.Body>
@@ -41,7 +57,7 @@ const BuyerForm = ({ show, handleClose, buy, cart }) => {
                     <Button variant="secondary" onClick={handleClose}>
                         Cerrar
                     </Button>
-                    <Button variant="success" onClick={() => buy(cart, user())}>
+                    <Button variant="success" onClick={() => buy(cart, user(), emailConfirmation)}>
                         Terminar compra
                     </Button>
                 </Modal.Footer>

@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Button } from "react-bootstrap";
+import { Button, Spinner } from "react-bootstrap";
 import { CartContext } from "../context/CartContext";
 import CartItem from "./CartItem"
 import './styles/Cart.css'
@@ -8,6 +8,9 @@ import { collection, addDoc, serverTimestamp, doc, updateDoc, getDoc } from "fir
 import BuyerForm from "./BuyerForm";
 import { db } from "../firebase/firebase";
 import swal from "sweetalert";
+
+
+
 
 const totalItem = (product) => {
     return product.quantity * product.price
@@ -33,53 +36,59 @@ const Cart = () => {
 
 
     const [finish, setFinish] = useState(false)
+    const [loading, setLoading] = useState(false)
     const [saleID, setSaleID] = useState('')
 
     const { cart, removeItem, clear } = useContext(CartContext)
 
-    const stockUpdate = (cart, user) => {
-        handleClose()
-        //list es un array para mostrar los productos que no se encuentran en stock
-        let list = []
-        cart.map((product) => {
-            //Traigo la cantidad de stock disponible en el momento de la compra
-            return getDoc(doc(db, 'products', product.id))
-                .then((data) => {
-                    if (data.data().stock - product.quantity >= 0) {
-                        updateDoc(doc(db, 'products', product.id), {
-                            stock: data.data().stock - product.quantity
-                        })
-                        buy(cart, user)
-                    } else {
-                        list = [...list, '\n' + product.name ]
-                        swal('No hay stock suficiente de: ' + list)
-                    }
-                })
-        })
-    }
-
-
-    const buy = (cart, user) => {
+    const stockUpdate = (cart, user, emailConfirmation) => {
         if ((user.name) && (user.phone) && (user.email)) {
-            addDoc(collection(db, 'sales'), {
-                user: user,
-                items: cart,
-                date: serverTimestamp(),
-                total: totalPrice(cart)
-            })
-                .then((data) => {
-                    setFinish(true)
-                    setSaleID(data.id)
-                    clear()
+            if (emailConfirmation) {
+                setLoading(true)
+                handleClose()
+                //list es un array para mostrar los productos que no se encuentran en stock
+                let list = []
+                cart.map((product) => {
+                    //Traigo la cantidad de stock disponible en el momento de la compra
+                    return getDoc(doc(db, 'products', product.id))
+                        .then((data) => {
+                            if (data.data().stock - product.quantity >= 0) {
+                                updateDoc(doc(db, 'products', product.id), {
+                                    stock: data.data().stock - product.quantity
+                                })
+                                buy(cart, user)
+                            } else {
+                                list = [...list, '\n' + product.name]
+                                swal('No hay stock suficiente de: ' + list)
+                            }
+                        })
                 })
+            } else {
+                swal('Error', 'Los emails no coinciden, vuelva a intentarlo', 'warning')
+            }
         } else {
             swal('Error', 'Por favor complete todos los campos', 'warning')
         }
     }
 
+    const buy = (cart, user) => {
+        addDoc(collection(db, 'sales'), {
+            user: user,
+            items: cart,
+            date: serverTimestamp(),
+            total: totalPrice(cart)
+        })
+            .then((data) => {
+                setFinish(true)
+                setLoading(false)
+                setSaleID(data.id)
+                clear()
+            })
+    }
+
     return (
         <>
-            {(cart.length) ? (
+            { !loading ? ((cart.length) ? (
                 <>
                     <div className="titles">
                         <h3 className="deleteTitle">Eliminar</h3>
@@ -97,10 +106,9 @@ const Cart = () => {
                     <Button className="button-finish" variant="success" onClick={handleShow}>Comprar</Button>
                     <BuyerForm show={show} handleClose={handleClose} buy={stockUpdate} cart={cart} />
                 </>
-            )
-                : (finish ? <h2>Gracias por su compra, el ID es {saleID}</h2> :
-                    <h2 className="noProductsTitle">No hay productos agregados click <Link to="/" className="noProductsTitleLink">aquí</Link> para volver al inico</h2>
-                )}
+            ) : (finish ? <h2 className="center">Gracias por su compra, el ID es {saleID}</h2> :
+                <h2 className="noProductsTitle">No hay productos agregados click <Link to="/" className="noProductsTitleLink">aquí</Link> para volver al inico</h2>
+            )) : (<Spinner className="center" animation="border" role="status" />)}
         </>
     )
 }

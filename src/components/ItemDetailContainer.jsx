@@ -26,7 +26,6 @@ const ItemDetailContainer = () => {
 
         getDoc(q)
             .then((data) => {
-                console.log(data.data())
                 data.data() ? (
                     setProduct(
                         {
