@@ -1,10 +1,17 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useState, useEffect } from "react";
 
 export const CartContext = createContext()
 
-const CartProvider = ( {children} ) => {
-    const [cart, setCart] = useState( [] )
 
+
+
+const CartProvider = ({ children }) => {
+    const [cart, setCart] = useState(JSON.parse(localStorage.getItem('cart')) || [])
+    
+    useEffect(()=>{
+        localStorage.setItem('cart', JSON.stringify(cart))
+    },[cart])
+    
     const addItem = (item, quantity) => {
         setCart([...cart, {
             id: item.id,
@@ -12,7 +19,6 @@ const CartProvider = ( {children} ) => {
             price: item.price,
             quantity: quantity
         }])
-
     }
 
     const addDuplicateItem = (index, quantity) => {
@@ -31,25 +37,24 @@ const CartProvider = ( {children} ) => {
 
     const isInCart = (id) => {
         return cart.findIndex((item) => item.id === id)
-        
     }
 
     const quantityProducts = (array) => {
         let quantityProducts = 0;
-        array.map((product)=> 
+        array.map((product) =>
             quantityProducts += product.quantity
         )
         return quantityProducts
     }
 
     const stockLocalControl = (cart, product, id) => {
-        if (isInCart(id) + 1)  {
+        if (isInCart(id) + 1) {
             return (product.stock - cart[isInCart(id)].quantity)
         }
     }
 
     return (
-        <CartContext.Provider value={ {cart, addItem, addDuplicateItem, removeItem, clear, isInCart, quantityProducts, stockLocalControl} }>
+        <CartContext.Provider value={{ cart, addItem, addDuplicateItem, removeItem, clear, isInCart, quantityProducts, stockLocalControl }}>
             {children}
         </CartContext.Provider>
     )
