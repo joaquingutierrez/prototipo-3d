@@ -6,11 +6,12 @@ import './styles/ItemListContainer.css'
 import { useParams } from "react-router-dom";
 import { db } from '../firebase/firebase'
 import { collection, getDocs, query, where } from "firebase/firestore"
+import UserBar from "./UserBar";
 
-const ItemListContainer = ({greeting}) => {
-    
-    const {id} = useParams()
-    const {tag} = useParams()
+const ItemListContainer = ({ greeting }) => {
+
+    const { id } = useParams()
+    const { tag } = useParams()
 
     const [products, setProducts] = useState([])
     const [loading, setLoading] = useState([true])
@@ -24,25 +25,28 @@ const ItemListContainer = ({greeting}) => {
         setLoading(true)
 
         getDocs(q || searchQ)
-        .then((data)=>{
-            const lista = data.docs.map((doc)=>{
-                return {
-                    ...doc.data(), 
-                    id: doc.id
-                }
+            .then((data) => {
+                const lista = data.docs.map((doc) => {
+                    return {
+                        ...doc.data(),
+                        id: doc.id
+                    }
+                })
+                setProducts(lista)
             })
-            setProducts(lista)
-        })
-        .finally(()=>{
-            setLoading(false)
-        })
-    },[id, tag])
+            .finally(() => {
+                setLoading(false)
+            })
+    }, [id, tag])
 
 
-    
+
     return (
         <>
-            <h3>{greeting}</h3>
+            <div className="userBar">
+                <h3>{greeting}</h3>
+                <UserBar />
+            </div>
             {loading ? <div className="center"><Spinner animation="border" role="status" /></div> : <ItemList productsList={products} />}
         </>
     )

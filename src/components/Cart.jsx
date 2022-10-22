@@ -80,9 +80,11 @@ const Cart = () => {
         })
             .then((data) => {
                 setFinish(true)
-                setLoading(false)
                 setSaleID(data.id)
                 clear()
+            })
+            .finally(()=>{
+                setLoading(false)
             })
     }
 
