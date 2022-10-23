@@ -53,8 +53,21 @@ const CartProvider = ({ children }) => {
         }
     }
 
+    const totalItem = (product) => {
+        return product.quantity * product.price
+    }
+    
+    
+    const totalPrice = (cart) => {
+        let total = 0
+        cart.map((product) =>
+            total += totalItem(product)
+        )
+        return total
+    }
+
     return (
-        <CartContext.Provider value={{ cart, addItem, addDuplicateItem, removeItem, clear, isInCart, quantityProducts, stockLocalControl }}>
+        <CartContext.Provider value={{ cart, addItem, addDuplicateItem, removeItem, clear, isInCart, quantityProducts, stockLocalControl, totalItem, totalPrice }}>
             {children}
         </CartContext.Provider>
     )

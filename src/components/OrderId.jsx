@@ -2,9 +2,9 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from '../firebase/firebase'
-import OrderIdItem from './OrderIdItem'
 import './styles/Cart.css'
 import { Spinner } from "react-bootstrap";
+import CartOrderTable from "./CartOrderTable";
 
 
 const OrderId = () => {
@@ -43,20 +43,10 @@ const OrderId = () => {
         <>
             {loading ? (
                 <Spinner className="center" animation="border" role="status" />
-            ) : ( total ? (
+            ) : (total ? (
                 <>
                     <h3>Fecha de compra: {date}</h3>
-                    <div className="titles">
-                        <h3 className="nameTitle">Cantidad x Producto</h3>
-                        <h3 className="priceTitle">Precio por unidad</h3>
-                        <h3 className="total-priceTitle">Precio total</h3>
-                    </div>
-                    <div className="cartContainer">
-                        {products.map((product, index) => <OrderIdItem key={product.id} product={product} index={index} />)}
-                    </div>
-                    <div className="total-buttonContainer">
-                        <h4 className="total">${total}</h4>
-                    </div>
+                    <CartOrderTable cart={products} totalPrice={total} orderId={orderId}/>
                 </>
             ) : (
                 <h2>El ID solicitado no existe</h2>
@@ -68,3 +58,19 @@ const OrderId = () => {
 }
 
 export default OrderId
+
+
+/*     <>
+<h3>Fecha de compra: {date}</h3>
+<div className="titles">
+    <h3 className="nameTitle">Cantidad x Producto</h3>
+    <h3 className="priceTitle">Precio por unidad</h3>
+    <h3 className="total-priceTitle">Precio total</h3>
+</div>
+<div className="cartContainer">
+    {products.map((product, index) => <OrderIdItem key={product.id} product={product} index={index} />)}
+</div>
+<div className="total-buttonContainer">
+    <h4 className="total">${total}</h4>
+</div>
+</> */

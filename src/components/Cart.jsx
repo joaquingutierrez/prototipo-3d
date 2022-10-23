@@ -1,29 +1,14 @@
 import React, { useContext, useState } from "react";
 import { Button, Spinner } from "react-bootstrap";
 import { CartContext } from "../context/CartContext";
-import CartItem from "./CartItem"
 import './styles/Cart.css'
 import { Link } from "react-router-dom";
 import { collection, addDoc, serverTimestamp, doc, updateDoc, getDoc } from "firebase/firestore";
-import BuyerForm from "./BuyerForm";
 import { db } from "../firebase/firebase";
 import swal from "sweetalert";
+import CartOrderTable from './CartOrderTable'
+import BuyerForm from "./BuyerForm";
 
-
-
-
-const totalItem = (product) => {
-    return product.quantity * product.price
-}
-
-
-const totalPrice = (cart) => {
-    let total = 0
-    cart.map((product) =>
-        total += totalItem(product)
-    )
-    return total
-}
 
 
 
@@ -39,7 +24,7 @@ const Cart = () => {
     const [loading, setLoading] = useState(false)
     const [saleID, setSaleID] = useState('')
 
-    const { cart, removeItem, clear } = useContext(CartContext)
+    const { cart, removeItem, clear, totalPrice } = useContext(CartContext)
 
     const stockUpdate = (cart, user, emailConfirmation) => {
         if ((user.name) && (user.phone) && (user.email)) {
@@ -83,28 +68,16 @@ const Cart = () => {
                 setSaleID(data.id)
                 clear()
             })
-            .finally(()=>{
+            .finally(() => {
                 setLoading(false)
             })
     }
 
     return (
         <>
-            { !loading ? ((cart.length) ? (
+            {!loading ? ((cart.length) ? (
                 <>
-                    <div className="titles">
-                        <h3 className="deleteTitle">Eliminar</h3>
-                        <h3 className="nameTitle">Cantidad x Producto</h3>
-                        <h3 className="priceTitle">Precio por unidad</h3>
-                        <h3 className="total-priceTitle">Precio total</h3>
-                    </div>
-                    <div className="cartContainer">
-                        {cart.map((product, index) => <CartItem key={product.id} totalItem={totalItem} product={product} index={index} removeItem={removeItem} />)}
-                    </div>
-                    <div className="total-buttonContainer">
-                        <Button className="button-clear" variant="success" onClick={clear}>Eliminar todo</Button>
-                        <h4 className="total">Total: ${totalPrice(cart)}</h4>
-                    </div>
+                    <CartOrderTable cart={cart} removeItem={removeItem} clear={clear} />
                     <Button className="button-finish" variant="success" onClick={handleShow}>Comprar</Button>
                     <BuyerForm show={show} handleClose={handleClose} buy={stockUpdate} cart={cart} />
                 </>
@@ -116,4 +89,3 @@ const Cart = () => {
 }
 
 export default Cart
-
