@@ -8,7 +8,7 @@ const Search = () => {
 
     const searchEngine = () => {
         const searchInput = document.getElementById('searchInput').value
-        setTag(searchInput)
+        setTag(searchInput.toLowerCase())
     }
 
     return (
