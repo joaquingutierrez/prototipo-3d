@@ -75,3 +75,32 @@
     margin-right: auto;
     margin-top: 10%;
 }
+
+@media (max-width: 991px) {
+    .titles {
+        width: 100%;
+        font-size:small;
+        gap: 10px;
+    }
+    .cartContainer {
+        width: 100%;
+        font-size: 5px;
+    }
+    .total-buttonContainer {
+        width: 100%;
+        font-size: 5px;
+    }
+    .fontSizeTitle {
+        font-size: 1.1rem;
+        margin-top: auto;
+        margin-bottom: auto;
+    }
+    .button-finish {
+        margin-right: 0;
+        transform: scale(0.9);
+    }
+    .button-clear {
+        transform: scale(0.9);
+        margin-left: 0;
+    }
+}

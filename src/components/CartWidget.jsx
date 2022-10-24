@@ -10,7 +10,7 @@ const CartWidget = () => {
     const cartLength = quantityProducts(cart)
     return (
         <div className="shoppingCart">
-            <ShoppingCartRoundedIcon fontSize="large"/>
+            <ShoppingCartRoundedIcon fontSize="large" />
             {(cartLength>0) && (<div className="numerItemsContainer"><p className="numerItems">{cartLength}</p></div>)}
         </div>
     )

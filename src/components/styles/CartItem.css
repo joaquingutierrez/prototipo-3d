@@ -28,3 +28,11 @@
 .background-gray {
     background-color: gray;
 }
+
+@media (max-width: 991px) {
+    .fontSizeItems {
+        font-size: 1rem;
+        margin-top: auto;
+        margin-bottom: auto;
+    }
+}

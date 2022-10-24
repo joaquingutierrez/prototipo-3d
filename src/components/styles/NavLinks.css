@@ -29,3 +29,13 @@
     pointer-events: none;
     transform: scale(1.1, 1.1);
 }
+
+
+@media (max-width: 991px) {
+    .navLinks {
+        flex-direction: column;
+        align-items: center;
+        width: auto;
+        gap: 10px;
+    }
+}

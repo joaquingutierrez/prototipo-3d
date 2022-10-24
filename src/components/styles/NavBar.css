@@ -17,12 +17,12 @@
 }
 
 .titleLogo {
-    display:flex;
+    display: flex;
     align-items: center;
 }
 
 .cartSearch {
-    display:flex;
+    display: flex;
     align-items: center;
 }
 
@@ -35,3 +35,4 @@
     text-decoration: none;
     color: black;
 }
+

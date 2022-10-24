@@ -8,3 +8,10 @@
     gap: 10px;
     margin: 10px;
 }
+
+@media (max-width: 991px) {
+    .userBar {
+        display: block;
+        margin: 2%;
+    }
+}
