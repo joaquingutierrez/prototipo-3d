@@ -13,6 +13,7 @@ import { CartContext } from "../context/CartContext";
 
 const ItemDetailContainer = () => {
 
+    //id del producto
     const { id } = useParams()
 
     const [product, setProduct] = useState({})
@@ -31,6 +32,7 @@ const ItemDetailContainer = () => {
                         {
                             ...data.data(),
                             id: data.id,
+                            //se revisa si al momento de volver a agregar al carrito un mismo producto, hay stock suficiente
                             stock: stockLocalControl(cart, data.data(), data.id) >= 0 ? stockLocalControl(cart, data.data(), data.id) : data.data().stock
                         }
                     )

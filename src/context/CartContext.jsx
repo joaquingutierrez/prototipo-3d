@@ -39,9 +39,9 @@ const CartProvider = ({ children }) => {
         return cart.findIndex((item) => item.id === id)
     }
 
-    const quantityProducts = (array) => {
+    const quantityProducts = (cart) => {
         let quantityProducts = 0;
-        array.map((product) =>
+        cart.map((product) =>
             quantityProducts += product.quantity
         )
         return quantityProducts

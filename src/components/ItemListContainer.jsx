@@ -10,6 +10,7 @@ import UserBar from "./UserBar";
 
 const ItemListContainer = ({ greeting }) => {
 
+    //id se refiere al id de la categoría elegida, mientras que tag es la palabra, o palabras, puestas en el buscador para filtrar en los productos
     const { id } = useParams()
     const { tag } = useParams()
 

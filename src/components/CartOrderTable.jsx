@@ -8,7 +8,7 @@ const CartOrderTable = ( { cart, removeItem, clear, orderId } ) => {
 
     const { totalItem, totalPrice } = useContext(CartContext)
 
-
+    //se verifica si orderId existe para saber si se renderiza el carro o la orden de compra
     return (
         <>
             <div className="titles">

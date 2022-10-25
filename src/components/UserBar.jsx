@@ -15,8 +15,8 @@ const UserBar = () => {
         <>
             <div className='orderId'>
                 <h5>Consultar ID de compra: </h5>
-                <input onChange={handleChange} id='orderId' className="form-control me-2" type="search" placeholder="Buscar..." aria-label="Search" />
-                <Link to={'/idcompra/' + orderId}><Button variant="success">Buscar</Button></Link>
+                <input onChange={handleChange} id='orderId' className="form-control me-2" type="search" placeholder="Consultar la compra..." aria-label="Search" />
+                <Link to={'/idcompra/' + orderId}><Button variant="success">Consultar</Button></Link>
             </div>
         </>
     )

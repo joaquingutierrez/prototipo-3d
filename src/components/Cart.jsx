@@ -14,12 +14,12 @@ import BuyerForm from "./BuyerForm";
 
 const Cart = () => {
 
+    //show es un state para el modal
     const [show, setShow] = useState(false);
-
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
-
+    //finish se utiliza para saber cuando la compra a sido exitosa, saleID guarda el estado del ID de la compra
     const [finish, setFinish] = useState(false)
     const [loading, setLoading] = useState(false)
     const [saleID, setSaleID] = useState('')
@@ -34,7 +34,7 @@ const Cart = () => {
                 //list es un array para mostrar los productos que no se encuentran en stock
                 let list = []
                 cart.map((product) => {
-                    //Traigo la cantidad de stock disponible en el momento de la compra
+                    //Traigo la cantidad de stock disponible en el momento de la compra para saber si hay suficiente
                     return getDoc(doc(db, 'products', product.id))
                         .then((data) => {
                             if (data.data().stock - product.quantity >= 0) {
@@ -75,17 +75,20 @@ const Cart = () => {
 
     return (
         <>
-            {!loading ? ((cart.length) ? (
-                <>
-                    <CartOrderTable cart={cart} removeItem={removeItem} clear={clear} />
-                    <Button className="button-finish" variant="success" onClick={handleShow}>Comprar</Button>
-                    <BuyerForm show={show} handleClose={handleClose} buy={stockUpdate} cart={cart} />
-                </>
-            ) : (finish ? <h2 className="center">Gracias por su compra, el ID es {saleID}</h2> :
-                <h2 className="noProductsTitle">No hay productos agregados click <Link to="/" className="noProductsTitleLink">aquí</Link> para volver al inico</h2>
-            )) : (<Spinner className="center" animation="border" role="status" />)}
+            {loading ? (<Spinner className="center" animation="border" role="status" />) : (
+                (cart.length) ? (
+                    <>
+                        <CartOrderTable cart={cart} removeItem={removeItem} clear={clear} />
+                        <Button className="button-finish" variant="success" onClick={handleShow}>Comprar</Button>
+                        <BuyerForm show={show} handleClose={handleClose} buy={stockUpdate} cart={cart} />
+                    </>
+                ) : (finish ? <h2 className="center">Gracias por su compra, el ID es {saleID}</h2> :
+                    <h2 className="noProductsTitle">No hay productos agregados click <Link to="/" className="noProductsTitleLink">aquí</Link> para volver al inico</h2>
+                ))
+            }
         </>
     )
 }
 
 export default Cart
+

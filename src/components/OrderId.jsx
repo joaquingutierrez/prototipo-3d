@@ -22,6 +22,7 @@ const OrderId = () => {
         const docRef = doc(db, "sales", orderId)
         getDoc(docRef)
             .then((data) => {
+                //se verifica si existe, y si existe se toman los datos
                 const list = data.data()?.items.map((prod) => {
                     return {
                         ...prod
