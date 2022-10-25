@@ -1,17 +1,51 @@
 import React, { createContext, useState, useEffect } from "react";
+import { auth, provider, db } from '../firebase/firebase'
+import { signInWithPopup } from "firebase/auth";
+import { doc, getDoc, setDoc } from "firebase/firestore";
 
 export const CartContext = createContext()
 
 
-
-
 const CartProvider = ({ children }) => {
     const [cart, setCart] = useState(JSON.parse(localStorage.getItem('cart')) || [])
-    
-    useEffect(()=>{
+    const [user, setUser] = useState({})
+
+    const signInwithGoogle = () => {
+        signInWithPopup(auth, provider)
+            .then((result) => {
+                //se consulta a la base de datos si el usuario existe, de lo contrario se crea un documento nuevo con sus datos básicos
+                const userRef = doc(db, 'users', result.user.uid)
+                getDoc(userRef)
+                    .then((data) => {
+                        let userData = {}
+                        if (data.exists()) {
+                            userData = data.data()
+                        } else {
+                            userData = {
+                                uid: result.user.uid,
+                                name: result.user.displayName,
+                                email: result.user.email,
+                                profilePic: result.user.photoURL,
+                                wishList: [],
+                                buys: []
+                            }
+                            setDoc(doc(db, "users", userData.uid), {
+                                ...userData
+                            })
+                        }
+                        setUser(userData)
+                    })
+                    .catch((error) => {
+                        console.log(error)
+                    })
+            })
+    }
+
+
+    useEffect(() => {
         localStorage.setItem('cart', JSON.stringify(cart))
-    },[cart])
-    
+    }, [cart])
+
     const addItem = (item, quantity) => {
         setCart([...cart, {
             id: item.id,
@@ -56,8 +90,8 @@ const CartProvider = ({ children }) => {
     const totalItem = (product) => {
         return product.quantity * product.price
     }
-    
-    
+
+
     const totalPrice = (cart) => {
         let total = 0
         cart.map((product) =>
@@ -67,7 +101,7 @@ const CartProvider = ({ children }) => {
     }
 
     return (
-        <CartContext.Provider value={{ cart, addItem, addDuplicateItem, removeItem, clear, isInCart, quantityProducts, stockLocalControl, totalItem, totalPrice }}>
+        <CartContext.Provider value={{ cart, addItem, addDuplicateItem, removeItem, clear, isInCart, quantityProducts, stockLocalControl, totalItem, totalPrice, user, signInwithGoogle }}>
             {children}
         </CartContext.Provider>
     )

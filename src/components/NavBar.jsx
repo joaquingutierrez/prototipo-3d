@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useContext} from "react";
 import logo from '../assets/logo.png'
 import './styles/NavBar.css'
 import CartWidget from './CartWidget'
@@ -8,6 +8,7 @@ import NavLinks from './NavLinks'
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
+import { CartContext } from "../context/CartContext";
 
 const NavBar = () => {
 
@@ -16,6 +17,8 @@ const NavBar = () => {
         { id: 1, name: 'Veladores', path: '/category/veladores' },
         { id: 2, name: 'Juguetes', path: '/category/juguetes' }
     ]
+
+    const { user } = useContext(CartContext)
 
     return (
         <>
@@ -35,6 +38,7 @@ const NavBar = () => {
                         <Nav className="w-100 mx-auto">
                             <NavLinks categorias={categorias} />
                         </Nav>
+                        <Link to='/user' className="styleNone">{user.name || 'Iniciar sesion'}</Link>
                         <Link to="/cart" className="styleNone">
                             <CartWidget />
                         </Link>

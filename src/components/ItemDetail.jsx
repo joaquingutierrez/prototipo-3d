@@ -4,9 +4,10 @@ import './styles/ItemDetail.css'
 import { Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import { CartContext } from "../context/CartContext";
+import FavoriteWidget from './FavoriteWidget'
 
 
-const ItemDetail = ({ product }) => {
+const ItemDetail = ({ product, addToWishList, wished }) => {
 
     const { name, image, description, stock, price } = product
     //checkout se refiere a si el producto ya fue agregado al carrito o no
@@ -28,6 +29,7 @@ const ItemDetail = ({ product }) => {
                         <img className="image" src={image} alt={name} />
                         <p className="description">{description}</p>
                         <div className="buy">
+                            <FavoriteWidget wished={wished} addToWishList={addToWishList} name={name} />
                             <h2>{name}</h2>
                             <h4>${price}</h4>
                             {checkout ? <Button variant="success"><Link to="/cart" className="style-link">Finalizar compra</Link></Button> : (<ItemCount stock={stock} initial={1} onAdd={onAdd} />)}

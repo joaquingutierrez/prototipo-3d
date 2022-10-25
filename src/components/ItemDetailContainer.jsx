@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import Spinner from 'react-bootstrap/Spinner'
 import './styles/ItemDetailContainer.css'
 import { useParams } from "react-router-dom";
-import { doc, getDoc } from "firebase/firestore"
+import { doc, getDoc, setDoc } from "firebase/firestore"
 import { db } from '../firebase/firebase'
 import { CartContext } from "../context/CartContext";
 
@@ -18,8 +18,9 @@ const ItemDetailContainer = () => {
 
     const [product, setProduct] = useState({})
     const [loading, setLoading] = useState([true])
+    const [wished, setWished] = useState(false)
 
-    const { cart, stockLocalControl } = useContext(CartContext)
+    const { cart, stockLocalControl, user } = useContext(CartContext)
 
     useEffect(() => {
 
@@ -46,10 +47,26 @@ const ItemDetailContainer = () => {
             })
     }, [id, cart, stockLocalControl])
 
+    useEffect(() => {
+        user.wishList && user.wishList.some((itemId) => itemId === id) && setWished(true)
+    }, [wished, id, user.wishList])
+
+
+    const addToWishList = (name) => {
+        const userRef = doc(db, 'users', user.uid)
+        user.wishList = [...user.wishList, {
+            id,
+            name
+        }]
+        setDoc(userRef, { wishList: user.wishList }, { merge: true })
+        console.log('agragado a la lista de deseados');
+        setWished(true)
+    }
+
 
     return (
         <div className="containerDetail">
-            {loading ? <div className="center"><Spinner animation="border" role="status" /></div> : <ItemDetail product={product} />}
+            {loading ? <div className="center"><Spinner animation="border" role="status" /></div> : <ItemDetail product={product} addToWishList={addToWishList} wished={wished} />}
         </div>
     )
 
