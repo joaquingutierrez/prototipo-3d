@@ -7,6 +7,7 @@ import { useParams } from "react-router-dom";
 import { doc, getDoc, setDoc } from "firebase/firestore"
 import { db } from '../firebase/firebase'
 import { CartContext } from "../context/CartContext";
+import swal from "sweetalert";
 
 
 
@@ -53,13 +54,17 @@ const ItemDetailContainer = () => {
 
 
     const addToWishList = (name) => {
-        const userRef = doc(db, 'users', user.uid)
-        user.wishList = [...user.wishList, {
-            id,
-            name
-        }]
-        setDoc(userRef, { wishList: user.wishList }, { merge: true })
-        setWished(true)
+        if (user.name) {
+            const userRef = doc(db, 'users', user.uid)
+            user.wishList = [...user.wishList, {
+                id,
+                name
+            }]
+            setDoc(userRef, { wishList: user.wishList }, { merge: true })
+            setWished(true)
+        } else {
+            swal('Error', 'Debes iniciar sesión para agregar a favoritos', 'warning')
+        }
     }
 
 
