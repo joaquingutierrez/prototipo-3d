@@ -48,8 +48,9 @@ const ItemDetailContainer = () => {
             })
     }, [id, cart, stockLocalControl])
 
+    //este useEffect se utiliza para comprobar si el item ya se encuentra en la lista de deseados del usuario
     useEffect(() => {
-        user.wishList && user.wishList.some((item) => item.id === id) && setWished(true)
+        user.wishList.some((item) => item.id === id) && setWished(true)
     }, [wished, id, user.wishList])
 
 

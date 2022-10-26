@@ -11,6 +11,8 @@
 
 .wishListItem {
     grid-area: wishListItem;
+    text-align: end;
+    margin-right: 3%;
     color: green;
 }
 .wishListItem:hover {

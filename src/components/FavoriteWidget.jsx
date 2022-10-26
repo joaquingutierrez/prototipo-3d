@@ -5,7 +5,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 const FavoriteWidget = ({ wished, addToWishList, name }) => {
     
 
-
+    //si wished es true significa que el producto ya se encuentra en la lista de deseados
     return (
         <>
             {wished ? (

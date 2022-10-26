@@ -12,6 +12,7 @@ const UserContainer = () => {
     const [userData, setUserData] = useState(user)
 
 
+    //este useEffect es para que pueda traer la imagen de user y los datos de la wishList y los IDs de las compras
     useEffect(() => {
         setUserData(user)
     }, [user])
@@ -30,11 +31,21 @@ const UserContainer = () => {
         })
     }
 
+    const closeSession = () => {
+        setUserData({
+            uid: '',
+            name: '',
+            email: '',
+            profilePic: '',
+            wishList: [],
+            buys: []
+        })
+    }
     return (
         <div className="userContainer">
             {
-                user.name ?
-                    <UserData user={userData} deleteFromWishList={deleteFromWishList} />
+                userData.name ?
+                    <UserData user={userData} deleteFromWishList={deleteFromWishList} closeSession={closeSession} />
                     :
                     <Button variant='success' onClick={signInwithGoogle} className='buttonSession'>Iniciar sesion</Button>
             }

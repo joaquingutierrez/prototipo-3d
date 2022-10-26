@@ -36,9 +36,11 @@ const Cart = () => {
                         updateDoc(doc(db, 'products', product.id), {
                             stock: data.data().stock - product.quantity
                         })
+                        //list es un array para poder comparar con cart, si es tiene la misma cantidad de elementos, entonces hay stock de todos los productos y se puede pasar a la compra
                         list = [...list, product]
                         list.length === cart.length && buy(cart, userData)
                     } else {
+                        //list es un array para mostrar los productos que no se encuentran en stock
                         list = [...list, '\n' + product.name]
                         swal('No hay stock suficiente de: ' + list)
                     }
@@ -55,7 +57,6 @@ const Cart = () => {
                 if (emailConfirmation) {
                     setLoading(true)
                     handleClose()
-                    //list es un array para mostrar los productos que no se encuentran en stock
                     stockUpdate(cart, userData)
                 } else {
                     swal('Error', 'Los emails no coinciden, vuelva a intentarlo', 'warning')

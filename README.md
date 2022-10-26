@@ -6,7 +6,7 @@ Posee tres categorías en las cuales se puede navegar. Posee nueve articulos (tr
 
 Haciendo click en más detalles del producto, se puede acceder a una vista más detallada del mismo donde se encuentra también un componente para elegir la cantidad deseada y un botón para agregar al carrito.
 
-Haciendo click en "Acceder" se puede iniciar sesión através de Google, haciendo esto se puede acceder a dos características: la primera es la posibilidad de poder agregar productos a la lista de deseados (para esto se debe entrar a detalles del producto y hacer click en el corazon); la segunda es poder guardar los IDs de compra en un arreglo para poder visualizarlos y almacenarlos más fácilmente.
+Haciendo click en "Acceder" se puede iniciar sesión através de Google, haciendo esto se puede acceder a dos características: la primera es la posibilidad de poder agregar productos a la lista de deseados (para esto se debe entrar a detalles del producto y hacer click en el corazon); la segunda es poder guardar los IDs de compra en un arreglo para poder visualizarlos y almacenarlos más fácilmente. Para cerrar sesión solamente hay que entrar en "Detalles" y hacer click en el botón "Cerrar sesión".
 
 Si se agrega un producto a la lista de deseados, la única manera de borrarlo es entrando a "Detalles" y "Eliminar de favoritos".
 
@@ -20,3 +20,4 @@ Se utiliza las siguientes dependecias:
 * React-Bootstrap para traer ciertos componentes como, NavBar, Card y Spinner; y ayudar a dar estilo al sitio.
 * React-Router-Dom para poder crear las rutas, evitando así tener que recargar la página entera cada vez que se desea realizar un cambio.
 * Material UI para poder incorporar el ícono del carrito y los íconos del corazon vacío y del corazón relleno.
+* Firebase para poder utilizar una base de datos de Firestore y además para poder usar el servicio de autentificación para que el usuario pueda acceder con su email de Google
