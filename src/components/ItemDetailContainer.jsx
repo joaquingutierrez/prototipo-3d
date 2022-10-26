@@ -48,7 +48,7 @@ const ItemDetailContainer = () => {
     }, [id, cart, stockLocalControl])
 
     useEffect(() => {
-        user.wishList && user.wishList.some((itemId) => itemId === id) && setWished(true)
+        user.wishList && user.wishList.some((item) => item.id === id) && setWished(true)
     }, [wished, id, user.wishList])
 
 
@@ -59,7 +59,6 @@ const ItemDetailContainer = () => {
             name
         }]
         setDoc(userRef, { wishList: user.wishList }, { merge: true })
-        console.log('agragado a la lista de deseados');
         setWished(true)
     }
 

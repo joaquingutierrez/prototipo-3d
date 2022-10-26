@@ -8,7 +8,14 @@ export const CartContext = createContext()
 
 const CartProvider = ({ children }) => {
     const [cart, setCart] = useState(JSON.parse(localStorage.getItem('cart')) || [])
-    const [user, setUser] = useState({})
+    const [user, setUser] = useState({
+        uid: '',
+        name: '',
+        email: '',
+        profilePic: '',
+        wishList: [],
+        buys: []
+    })
 
     const signInwithGoogle = () => {
         signInWithPopup(auth, provider)
@@ -99,6 +106,7 @@ const CartProvider = ({ children }) => {
         )
         return total
     }
+
 
     return (
         <CartContext.Provider value={{ cart, addItem, addDuplicateItem, removeItem, clear, isInCart, quantityProducts, stockLocalControl, totalItem, totalPrice, user, signInwithGoogle }}>

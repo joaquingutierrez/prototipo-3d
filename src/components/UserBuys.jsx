@@ -9,8 +9,8 @@ const UserBuys = ({ buys }) => {
             <ul>
                 {buys.map((saleId) => {
                         return (
-                            <li>
-                                <Link key={saleId} to={'/idcompra/' + saleId}>{saleId}</Link>
+                            <li key={saleId}>
+                                <Link to={'/idcompra/' + saleId}>{saleId}</Link>
                             </li>
                         )
                     })}

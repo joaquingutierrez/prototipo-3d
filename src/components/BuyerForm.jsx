@@ -45,7 +45,7 @@ const BuyerForm = ({ show, handleClose, buy, cart }) => {
                         <label>
                             Email:
                         </label>
-                        <input type="email" id="email" />
+                        <input onChange={handleChangeEmail} type="email" id="email" />
                         <label>
                             Confimación del Email:
                         </label>

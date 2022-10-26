@@ -38,7 +38,7 @@ const NavBar = () => {
                         <Nav className="w-100 mx-auto">
                             <NavLinks categorias={categorias} />
                         </Nav>
-                        <Link to='/user' className="styleNone">{user.name || 'Iniciar sesion'}</Link>
+                        <Link to='/user' className="styleNone">{user.name || 'Acceder'}</Link>
                         <Link to="/cart" className="styleNone">
                             <CartWidget />
                         </Link>
