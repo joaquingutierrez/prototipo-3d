@@ -36,7 +36,8 @@ const Cart = () => {
                         updateDoc(doc(db, 'products', product.id), {
                             stock: data.data().stock - product.quantity
                         })
-                        buy(cart, userData)
+                        list = [...list, product]
+                        list.length === cart.length && buy(cart, userData)
                     } else {
                         list = [...list, '\n' + product.name]
                         swal('No hay stock suficiente de: ' + list)
@@ -86,7 +87,7 @@ const Cart = () => {
 
     const addSaleIdtoUser = (saleId) => {
         const userRef = doc(db, 'users', user.uid)
-        user.buys = [...user.buys, 
+        user.buys = [...user.buys,
             saleId
         ]
         setDoc(userRef, { buys: user.buys }, { merge: true })
@@ -98,7 +99,7 @@ const Cart = () => {
                 (cart.length) ? (
                     <>
                         <CartOrderTable cart={cart} removeItem={removeItem} clear={clear} />
-                        <Button className="button-finish" variant="success" onClick={user.name ? ()=>buyControl(cart, user, null) : handleShow}>Comprar</Button>
+                        <Button className="button-finish" variant="success" onClick={user.name ? () => buyControl(cart, user, null) : handleShow}>Comprar</Button>
                         <BuyerForm show={show} handleClose={handleClose} buy={buyControl} cart={cart} />
                     </>
                 ) : (finish ? <h2 className="center">Gracias por su compra, el ID es {saleID}</h2> :
