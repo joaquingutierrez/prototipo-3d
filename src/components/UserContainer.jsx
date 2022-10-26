@@ -4,6 +4,7 @@ import { Button } from "react-bootstrap";
 import UserData from './UserData'
 import { doc, updateDoc } from "firebase/firestore";
 import { db } from "../firebase/firebase";
+import './styles/UserContainer.css'
 
 const UserContainer = () => {
 
@@ -30,7 +31,7 @@ const UserContainer = () => {
     }
 
     return (
-        <>
+        <div className="userContainer">
             {
                 user.name ?
                     <UserData user={userData} deleteFromWishList={deleteFromWishList} />
@@ -38,7 +39,7 @@ const UserContainer = () => {
                     <Button variant='success' onClick={signInwithGoogle}>Iniciar sesion</Button>
             }
 
-        </>
+        </div>
     )
 }
 

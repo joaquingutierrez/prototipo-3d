@@ -1,0 +1,33 @@
+.wishListTable {
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-template-rows: 1fr;
+    grid-template-areas: "deleteWishListItem wishListItem";
+    border: 1px solid black;
+}
+
+.wishListItem {
+    grid-area: wishListItem;
+    color: green;
+}
+.wishListItem:hover {
+    color: rgb(1, 80, 1);
+}
+
+.deleteWishListItem {
+    grid-area: deleteWishListItem;
+    cursor: pointer;
+    color: green;
+}
+.deleteWishListItem:hover {
+    color: rgb(1, 80, 1);
+}
+
+@media (max-width: 991px) {
+    .wishListTable {
+        width: 95%;
+    }
+}

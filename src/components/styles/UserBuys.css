@@ -1,0 +1,12 @@
+.userBuysTable {
+    width: fit-content;
+    margin: auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    grid-area: 'userBuysIds';
+}
+
+.userBuysIds {
+    grid-area: userBuysIds;
+}

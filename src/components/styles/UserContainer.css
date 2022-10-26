@@ -1,0 +1,10 @@
+.userContainer {
+    width: 75%;
+    margin: 2% auto;
+}
+
+@media (max-width: 991px) {
+    .userContainer {
+        width: 95%;
+    }
+}

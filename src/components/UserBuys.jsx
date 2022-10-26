@@ -1,20 +1,26 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import './styles/UserBuys.css'
 
 const UserBuys = ({ buys }) => {
 
 
     return (
         <>
-            <ul>
-                {buys.map((saleId) => {
+            {
+                buys.length > 0 ? (
+                    buys.map((saleId, index) => {
                         return (
-                            <li key={saleId}>
-                                <Link to={'/idcompra/' + saleId}>{saleId}</Link>
-                            </li>
+                            <div className='userBuysTable userBuysIds' key={saleId} >
+                                <Link className={index % 2 === 0 ? 'styleNone' : 'styleNone background-gray'} to={'/idcompra/' + saleId}><h5>{saleId}</h5></Link>
+                            </div>
                         )
-                    })}
-            </ul>
+                    })
+
+                ) : (
+                    <h5>Aun no hay compras registradas</h5>
+                )
+            }
         </>
     )
 }
