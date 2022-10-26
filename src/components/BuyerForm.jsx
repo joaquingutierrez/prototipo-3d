@@ -33,7 +33,7 @@ const BuyerForm = ({ show, handleClose, buy, cart }) => {
                 </Modal.Header>
                 <Modal.Body>
 
-                    <form className='userData'>
+                    <form className='buyerForm'>
                         <label>
                             Nombre y apellido:
                         </label>

@@ -36,7 +36,7 @@ const UserContainer = () => {
                 user.name ?
                     <UserData user={userData} deleteFromWishList={deleteFromWishList} />
                     :
-                    <Button variant='success' onClick={signInwithGoogle}>Iniciar sesion</Button>
+                    <Button variant='success' onClick={signInwithGoogle} className='buttonSession'>Iniciar sesion</Button>
             }
 
         </div>

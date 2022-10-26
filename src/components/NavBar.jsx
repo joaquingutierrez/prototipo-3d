@@ -39,9 +39,9 @@ const NavBar = () => {
                             <NavLinks categorias={categorias} />
                         </Nav>
                         {user.name ?
-                            <NavLink to='/user' className="styleNone me-4">Detalles</NavLink>
+                            <NavLink to='/user' className="styleNone loginAccess">Detalles</NavLink>
                             :
-                            <Link className="styleNone me-4" onClick={signInwithGoogle}>Acceder</Link>
+                            <Link className="styleNone loginAccess" onClick={signInwithGoogle}>Acceder</Link>
                         }
                         <Link to="/cart" className="styleNone">
                             <CartWidget />

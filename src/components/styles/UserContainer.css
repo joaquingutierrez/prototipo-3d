@@ -3,6 +3,12 @@
     margin: 2% auto;
 }
 
+.buttonSession {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 @media (max-width: 991px) {
     .userContainer {
         width: 95%;
