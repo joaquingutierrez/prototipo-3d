@@ -48,6 +48,17 @@ const CartProvider = ({ children }) => {
             })
     }
 
+    const closeSession = () => {
+        setUser({
+            uid: '',
+            name: '',
+            email: '',
+            profilePic: '',
+            wishList: [],
+            buys: []
+        })
+    }
+
 
     useEffect(() => {
         localStorage.setItem('cart', JSON.stringify(cart))
@@ -109,7 +120,7 @@ const CartProvider = ({ children }) => {
 
 
     return (
-        <CartContext.Provider value={{ cart, addItem, addDuplicateItem, removeItem, clear, isInCart, quantityProducts, stockLocalControl, totalItem, totalPrice, user, signInwithGoogle }}>
+        <CartContext.Provider value={{ cart, addItem, addDuplicateItem, removeItem, clear, isInCart, quantityProducts, stockLocalControl, totalItem, totalPrice, user, signInwithGoogle, closeSession }}>
             {children}
         </CartContext.Provider>
     )

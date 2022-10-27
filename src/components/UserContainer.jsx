@@ -8,11 +8,11 @@ import './styles/UserContainer.css'
 
 const UserContainer = () => {
 
-    const { user, signInwithGoogle } = useContext(CartContext)
+    const { user, signInwithGoogle, closeSession } = useContext(CartContext)
     const [userData, setUserData] = useState(user)
 
 
-    //este useEffect es para que pueda traer la imagen de user y los datos de la wishList y los IDs de las compras
+    //este useEffect es para que pueda renderizar el user
     useEffect(() => {
         setUserData(user)
     }, [user])
@@ -31,16 +31,6 @@ const UserContainer = () => {
         })
     }
 
-    const closeSession = () => {
-        setUserData({
-            uid: '',
-            name: '',
-            email: '',
-            profilePic: '',
-            wishList: [],
-            buys: []
-        })
-    }
     return (
         <div className="userContainer">
             {
