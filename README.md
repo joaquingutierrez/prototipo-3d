@@ -2,6 +2,8 @@
 
 Este Proyecto se trata de un e-commerce de impresiones 3D hecho con React JS. Cuyo objetivo es el de aprender a utilizar esta librería.
 
+Link: https://prototipo-3d.vercel.app/
+
 Posee tres categorías en las cuales se puede navegar. Posee nueve articulos (tres por categoría).
 
 Haciendo click en más detalles del producto, se puede acceder a una vista más detallada del mismo donde se encuentra también un componente para elegir la cantidad deseada y un botón para agregar al carrito.
@@ -21,3 +23,4 @@ Se utiliza las siguientes dependecias:
 * React-Router-Dom para poder crear las rutas, evitando así tener que recargar la página entera cada vez que se desea realizar un cambio.
 * Material UI para poder incorporar el ícono del carrito y los íconos del corazon vacío y del corazón relleno.
 * Firebase para poder utilizar una base de datos de Firestore y además para poder usar el servicio de autentificación para que el usuario pueda acceder con su email de Google
+* Sweetalert para poder utilizar alerts sin detener la ejecución del código
